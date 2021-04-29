@@ -30,7 +30,7 @@ namespace App05Mono.Sprites
         public float LifeSpan = 0f;
         public bool IsRemoved = false;
         public bool IsActive = false;
-        public bool IsAlive = false;
+        public bool IsAlive = true;
         public bool IsVisible = false;
         public bool HasDied = false; 
 

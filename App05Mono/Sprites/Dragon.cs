@@ -21,23 +21,29 @@ namespace App05Mono.Sprites
         public override void Update(GameTime gameTime, List<Sprite> _sprites)
         {
             MoveDragon(_sprites);
-
-            foreach (var sprite in _sprites)
+            if (IsAlive)
             {
-                if (sprite is Dragon)
-                    continue;
-                if (sprite.HasDied == true)
-                    continue;
-                if (sprite.Rectangle.Intersects(this.Rectangle))
+                foreach (var sprite in _sprites)
                 {
-                    this.Health --;
-                    sprite.HasDied = true;
+                    if (sprite is Dragon)
+                        continue;
+                    if (sprite.HasDied == true)
+                        continue;
+                    if (sprite is Bullet && sprite.Parent == this)
+                        continue;
+                    if (sprite.Rectangle.Intersects(this.Rectangle))
+                    {
+                        this.Health--;
+                        sprite.HasDied = true;
+                    }
                 }
-            }
 
-            Position += Velocity;
-            Position.X = MathHelper.Clamp(Position.X, 0, DvDGame.ScreenWidth - Rectangle.Width);
-            Velocity = Vector2.Zero;
+                Position += Velocity;
+                Position.X = MathHelper.Clamp(Position.X, 0, DvDGame.ScreenWidth - Rectangle.Width);
+                Velocity = Vector2.Zero;
+            }
+            if (Health <= 0)
+                IsAlive = false;
         }
 
         private void MoveDragon(List<Sprite> _sprites)

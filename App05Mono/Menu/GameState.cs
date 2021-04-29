@@ -28,6 +28,12 @@ namespace App05Mono.Menu
         public override void LoadContent()
         {
             var dragonTexture = _content.Load<Texture2D>("GreenDragon");
+            dragon = new Dragon(dragonTexture)
+            {
+                Position = new Vector2(100, 150),
+                Bullet = new Bullet(_content.Load<Texture2D>("Bullet")),
+            };
+
 
             _sprites = new List<Sprite>()
             {
@@ -36,12 +42,7 @@ namespace App05Mono.Menu
                     Layer = 0.0f,
                     Position = new Vector2(DvDGame.ScreenWidth/2, DvDGame.ScreenHeight /2 ),
                 },
-            };
-
-            dragon = new Dragon(dragonTexture)
-            {
-                Position = new Vector2(100, 150),
-                Bullet = new Bullet(_content.Load<Texture2D>("Bullet")),
+                dragon
             };
         }
 
@@ -50,17 +51,15 @@ namespace App05Mono.Menu
             spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             foreach (Enemy enemy in enemy)
-                enemy.Update();
+                enemy.Update(_sprites);
             LoadEnemy();
 
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
-                dragon.Update(gameTime, _sprites);
         }
 
         public void LoadEnemy()
-        { 
-
+        {
             int randY = random.Next(100, 400);
             if (spawn >= 1)
             {
@@ -69,24 +68,17 @@ namespace App05Mono.Menu
                     enemy.Add(new Enemy(_content.Load<Texture2D>("Enemy"), new Vector2(1100, randY)));
             }
 
-
             for (int i = 0; i < enemy.Count; i++)
             {
-                if (!enemy[i].isVisible)
+                if (!enemy[i].IsAlive)
                 {
                     enemy.RemoveAt(i);
                     i--;
                 }
-                else if (dragon.Rectangle.Intersects(enemy[i].Rectangle))
-                {
-                    if (dragon.Health <= 0)
-                    {
-                        _game.Exit();
-                    }
-                }
+                if (!dragon.IsAlive) _game.Exit();
             }
         }
-    
+
 
         public override void PostUpdate(GameTime gameTime)
         {
