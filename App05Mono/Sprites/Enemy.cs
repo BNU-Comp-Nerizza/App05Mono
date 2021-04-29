@@ -12,13 +12,19 @@ namespace App05Mono.Sprites
         public Vector2 position;
         public Vector2 velocity;
         public Rectangle enemyRectangle;
-        public Vector2 enemyPosition;
-
 
         public bool isVisible = true;
 
         Random random = new Random();
         int randX, randY;
+
+        public Rectangle Rectangle
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            }
+        }
 
         public Enemy(Texture2D _texture, Vector2 _position)
         {

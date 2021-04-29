@@ -19,8 +19,6 @@ namespace App05Mono.Menu
         private SpriteFont arialFont;
         public Bullet Bullet;
         public Dragon dragon;
-        private Rectangle dragonRectangle;
-        private Rectangle enemyRectangle;
 
         public GameState(DvDGame game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
@@ -38,12 +36,12 @@ namespace App05Mono.Menu
                     Layer = 0.0f,
                     Position = new Vector2(DvDGame.ScreenWidth/2, DvDGame.ScreenHeight /2 ),
                 },
-                new Dragon(dragonTexture)
-                {
-                    Position = new Vector2(100,150),
-                    Bullet = new Bullet(_content.Load<Texture2D>("Bullet")),
-                    dragonRectangle = new Rectangle((int)0, (int)0, dragonTexture.Width, dragonTexture.Height)
-                }
+            };
+
+            dragon = new Dragon(dragonTexture)
+            {
+                Position = new Vector2(100, 150),
+                Bullet = new Bullet(_content.Load<Texture2D>("Bullet")),
             };
         }
 
@@ -55,16 +53,13 @@ namespace App05Mono.Menu
                 enemy.Update();
             LoadEnemy();
 
-
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
-            
-
+                dragon.Update(gameTime, _sprites);
         }
 
         public void LoadEnemy()
-        {
-            var enemyTexture = _content.Load<Texture2D>("GreenDragon");
+        { 
 
             int randY = random.Next(100, 400);
             if (spawn >= 1)
@@ -72,8 +67,6 @@ namespace App05Mono.Menu
                 spawn = 0;
                 if (enemy.Count() < 4)
                     enemy.Add(new Enemy(_content.Load<Texture2D>("Enemy"), new Vector2(1100, randY)));
-                enemyRectangle = new Rectangle((int)0, (int)0, enemyTexture.Width, enemyTexture.Height);
-
             }
 
 
@@ -84,15 +77,18 @@ namespace App05Mono.Menu
                     enemy.RemoveAt(i);
                     i--;
                 }
-                else if (dragonRectangle.Intersects(enemyRectangle))
+                else if (dragon.Rectangle.Intersects(enemy[i].Rectangle))
                 {
-                    _game.Exit();
+                    if (dragon.Health <= 0)
+                    {
+                        _game.Exit();
+                    }
                 }
             }
         }
     
 
-    public override void PostUpdate(GameTime gameTime)
+        public override void PostUpdate(GameTime gameTime)
         {
 
             for (int i = 0; i < _sprites.Count; i++)
@@ -111,6 +107,7 @@ namespace App05Mono.Menu
 
             foreach (var sprite in _sprites)
                 sprite.Draw(gameTime, _spriteBatch);
+            dragon.Draw(gameTime, _spriteBatch);
 
             _spriteBatch.End();
 
@@ -125,7 +122,7 @@ namespace App05Mono.Menu
             foreach (var sprite in _sprites)
             {
                 _spriteBatch.DrawString(arialFont, "App05: MonoGame by Nerizza Flores ", new Vector2(x, 05f), Color.DimGray);
-                _spriteBatch.DrawString(arialFont, "Health: ", new Vector2(x, 30f), Color.LightSlateGray);
+                _spriteBatch.DrawString(arialFont, "Health: " + dragon.Health, new Vector2(x, 30f), Color.LightSlateGray);
                 _spriteBatch.DrawString(arialFont, "Score: ", new Vector2(x, 50f), Color.LightSlateGray);
             }
 

@@ -11,13 +11,11 @@ namespace App05Mono.Sprites
         public int Health { get; set; }
 
         public Bullet Bullet;
-        public Rectangle dragonRectangle;
 
-        public bool HasDied = false;
 
         public Dragon(Texture2D texture) : base(texture)
         {
-
+            Health = 3;
         }
 
         public override void Update(GameTime gameTime, List<Sprite> _sprites)
@@ -28,9 +26,12 @@ namespace App05Mono.Sprites
             {
                 if (sprite is Dragon)
                     continue;
+                if (sprite.HasDied == true)
+                    continue;
                 if (sprite.Rectangle.Intersects(this.Rectangle))
                 {
-                    this.HasDied = true;
+                    this.Health --;
+                    sprite.HasDied = true;
                 }
             }
 

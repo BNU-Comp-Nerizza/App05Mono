@@ -32,6 +32,7 @@ namespace App05Mono.Sprites
         public bool IsActive = false;
         public bool IsAlive = false;
         public bool IsVisible = false;
+        public bool HasDied = false; 
 
         public readonly Color[] TextureData;
 
