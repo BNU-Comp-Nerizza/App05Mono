@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace App05Mono.Sprites
+namespace App05Mono.Spritesa
 {
     public class Enemy
     {
@@ -14,6 +14,7 @@ namespace App05Mono.Sprites
         public Rectangle enemyRectangle;
 
         public bool isVisible = true;
+        public bool IsAlive { get; private set; } = true;
 
         Random random = new Random();
         int randX, randY;
@@ -25,8 +26,6 @@ namespace App05Mono.Sprites
                 return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
             }
         }
-
-        public bool IsAlive { get; private set; }
 
         public Enemy(Texture2D _texture, Vector2 _position)
         {
