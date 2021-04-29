@@ -20,6 +20,7 @@ namespace App05Mono.Menu
         private SpriteFont arialFont;
         public Bullet Bullet;
         public Dragon dragon;
+        public bool IsOver = false;
 
         public GameState(DvDGame game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
@@ -49,18 +50,27 @@ namespace App05Mono.Menu
 
         public override void Update(GameTime gameTime)
         {
-            spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (!IsOver)
+            {
+                spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            foreach (Enemy enemy in enemy)
-                enemy.Update(_sprites);
-            LoadEnemy();
 
-            foreach (var sprite in _sprites.ToArray())
-                sprite.Update(gameTime, _sprites);
+
+                foreach (Enemy enemy in enemy)
+                    enemy.Update(_sprites);
+                LoadEnemy();
+
+
+
+                foreach (var sprite in _sprites.ToArray())
+                    sprite.Update(gameTime, _sprites);
+            }
+
         }
 
         public void LoadEnemy()
         {
+
             int randY = random.Next(100, 400);
             if (spawn >= 1)
             {
@@ -76,7 +86,8 @@ namespace App05Mono.Menu
                     enemy.RemoveAt(i);
                     i--;
                 }
-                if (!dragon.IsAlive) _game.Exit();
+                if (!dragon.IsAlive)
+                    IsOver = true;
             }
         }
 
@@ -121,6 +132,12 @@ namespace App05Mono.Menu
 
             x += 150;
 
+            if (IsOver)
+            {
+                //Middle of the screen - half of string size
+                _spriteBatch.DrawString(arialFont, "Game Over", new Vector2(640, 360) -
+                    new Vector2(arialFont.MeasureString("Game Over").X / 2, 0), Color.Black);
+            }
             _spriteBatch.End();
 
         }
