@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using App05Mono.Sprites;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
