@@ -53,7 +53,7 @@ namespace App05Mono.Menu
             Vector2 position = new Vector2(0, 0);
             _spriteBatch.Draw((Texture2D)backgroundMenu, position, Color.White);
             foreach (var components in _components)
-                components.Draw(gameTime, _spriteBatch);
+                components.Draw(_spriteBatch);
 
             _spriteBatch.End();
         }

@@ -21,6 +21,7 @@ namespace App05Mono.Menu
         public Bullet Bullet;
         public Dragon dragon;
         public bool IsOver = false;
+        private Button reload;
 
         public GameState(DvDGame game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
@@ -29,13 +30,21 @@ namespace App05Mono.Menu
 
         public override void LoadContent()
         {
+            arialFont = _content.Load<SpriteFont>("arial");
+            //Using your button design
+            reload = new Button(_content.Load<Texture2D>("button"), arialFont);
+            reload.Text = "Reload";
+            //using the button images
+            //reload = new Button(_content.Load<Texture2D>("reload"), arialFont);
+            reload.Position = new Vector2(640, 420);
+            reload.Click += Reload_Click;
+
             var dragonTexture = _content.Load<Texture2D>("GreenDragon");
             dragon = new Dragon(dragonTexture)
             {
                 Position = new Vector2(100, 150),
                 Bullet = new Bullet(_content.Load<Texture2D>("Bullet")),
             };
-
 
             _sprites = new List<Sprite>()
             {
@@ -48,19 +57,26 @@ namespace App05Mono.Menu
             };
         }
 
+        private void Reload_Click(object sender, EventArgs e)
+        {
+            if (IsOver)
+            {
+                LoadContent();
+                IsOver = false;
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
+            reload.Update(gameTime);
+
             if (!IsOver)
             {
                 spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-
-
                 foreach (Enemy enemy in enemy)
                     enemy.Update(_sprites);
                 LoadEnemy();
-
-
 
                 foreach (var sprite in _sprites.ToArray())
                     sprite.Update(gameTime, _sprites);
@@ -137,6 +153,7 @@ namespace App05Mono.Menu
                 //Middle of the screen - half of string size
                 _spriteBatch.DrawString(arialFont, "Game Over", new Vector2(640, 360) -
                     new Vector2(arialFont.MeasureString("Game Over").X / 2, 0), Color.Black);
+                reload.Draw(_spriteBatch);
             }
             _spriteBatch.End();
 

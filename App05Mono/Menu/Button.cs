@@ -66,7 +66,7 @@ namespace App05Mono.Menu
             PenColour = Color.AntiqueWhite;
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             var colour = Color.White;
 
