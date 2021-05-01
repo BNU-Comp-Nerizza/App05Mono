@@ -7,6 +7,13 @@ using System.Text;
 
 namespace App05Mono.Menu
 {
+    /// <summary>
+    /// The button class is the class used for buttons
+    /// that will be used in the menu state and game stae
+    /// Methods within the button class will 
+    /// allow the button to be clickable.
+    /// It inherits from the component class
+    /// </summary>
     public class Button : Component
     {
         #region Fields
@@ -57,6 +64,12 @@ namespace App05Mono.Menu
 
         #region Methods
 
+        /// <summary>
+        /// Constructor for the button class 
+        /// set up the texture and colour of the button
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="font"></param>
         public Button(Texture2D texture, SpriteFont font)
         {
             _texture = texture;
@@ -66,6 +79,10 @@ namespace App05Mono.Menu
             PenColour = Color.AntiqueWhite;
         }
 
+        /// <summary>
+        /// It draws the button sprite
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             var colour = Color.White;
@@ -84,6 +101,12 @@ namespace App05Mono.Menu
             }
         }
 
+        /// <summary>
+        /// Updates and check the button state 
+        /// whether the mouse intersects with the 
+        /// button or not
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             _previousMouse = _currentMouse;
