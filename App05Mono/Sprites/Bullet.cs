@@ -6,16 +6,23 @@ using System.Text;
 
 namespace App05Mono.Sprites
 {
+    /// <summary>
+    /// This is the bullet sprite class where it
+    /// inherits the sprite class methods.
+    /// It builds the bullet that the dragon will be using
+    /// </summary>
     public class Bullet : Sprite
     {
         private float _timer;
+        public object Colour { get; internal set; }
 
+        /// <summary>
+        /// Constructor of the bullet
+        /// </summary>
+        /// <param name="texture"></param>
         public Bullet(Texture2D texture) : base(texture)
         {
-
         }
-
-        public object Colour { get; internal set; }
 
         /// <summary>
         /// Cast the bullet based on the 

@@ -7,12 +7,18 @@ using System.Text;
 
 namespace App05Mono.Spritesa
 {
+    /// <summary>
+    /// This is the enemy sprite class where
+    /// it builds the dino which will the player's enemy
+    /// it build the texture, position and collision of the enemy
+    /// </summary>
     public class Enemy
     {
         public Texture2D texture;
         public Vector2 position;
         public Vector2 velocity;
         public Rectangle enemyRectangle;
+        public Dragon dragon1;
 
         public bool isVisible = true;
         public bool IsAlive { get; private set; } = true;
@@ -20,6 +26,9 @@ namespace App05Mono.Spritesa
         Random random = new Random();
         int randX, randY;
 
+        /// <summary>
+        /// initialize the instance of rectangle
+        /// </summary>
         public Rectangle Rectangle
         {
             get
@@ -28,6 +37,10 @@ namespace App05Mono.Spritesa
             }
         }
 
+        /// <summary>
+        /// Constructor of the enemy where it sets the position 
+        /// of the spawning of the enemy
+        /// </summary>
         public Enemy(Texture2D _texture, Vector2 _position)
         {
             texture = _texture;
@@ -39,6 +52,9 @@ namespace App05Mono.Spritesa
             velocity = new Vector2(randX, randY);
         }
 
+        /// <summary>
+        ///Check for the enemy's collision and position
+        /// </summary>
         public void Update(List<Sprite> _sprites)
         {
             if (IsAlive)
@@ -58,8 +74,10 @@ namespace App05Mono.Spritesa
             }
         }
 
-
-
+        /// <summary>
+        /// Check the which sprite 
+        /// is collided with the enemy
+        /// </summary>
         public void OnColide(List<Sprite> _sprites)
         {
             for (int i = 0; i < _sprites.Count; i++)
@@ -78,10 +96,15 @@ namespace App05Mono.Spritesa
                     bullet.IsRemoved = true;
 
                     this.IsAlive = false; // or add health and reduce health on impact.
+
                 }
             }
         }
 
+        /// <summary>
+        /// Draw the enemy sprite
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();

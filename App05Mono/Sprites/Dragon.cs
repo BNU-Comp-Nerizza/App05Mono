@@ -6,18 +6,35 @@ using System.Collections.Generic;
 
 namespace App05Mono.Sprites
 {
+    /// <summary>
+    /// This is the dragon sprite class where it
+    /// inherits the sprite class methods.
+    /// It builds the dragon that the player will be using
+    /// </summary>
     public class Dragon : Sprite
     {
         public int Health { get; set; }
 
+        public int Score { get; set; }
+
         public Bullet Bullet;
 
-
+        /// <summary>
+        /// Constructor of the dragon
+        /// it sets the player's health and score
+        /// </summary>
+        /// <param name="texture"></param>
         public Dragon(Texture2D texture) : base(texture)
         {
             Health = 3;
+            Score = 0;
         }
 
+        /// <summary>
+        /// Check for the player's collision and position
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="_sprites"></param>
         public override void Update(GameTime gameTime, List<Sprite> _sprites)
         {
             MoveDragon(_sprites);
@@ -46,6 +63,10 @@ namespace App05Mono.Sprites
                 IsAlive = false;
         }
 
+        /// <summary>
+        /// Set up the controls and movement of the dragon
+        /// </summary>
+        /// <param name="_sprites"></param>
         private void MoveDragon(List<Sprite> _sprites)
         {
             _previousKey = _currentKey;

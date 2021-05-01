@@ -22,6 +22,7 @@ namespace App05Mono.Menu
         public Dragon dragon;
         public bool IsOver = false;
         private Button reload;
+        private Button quit;
 
         public GameState(DvDGame game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
@@ -38,6 +39,11 @@ namespace App05Mono.Menu
             //reload = new Button(_content.Load<Texture2D>("reload"), arialFont);
             reload.Position = new Vector2(640, 420);
             reload.Click += Reload_Click;
+
+            quit = new Button(_content.Load<Texture2D>("button"), arialFont);
+            quit.Text = "Quit Game";
+            quit.Position = new Vector2(640, 480);
+            quit.Click += Quit_Click;
 
             var dragonTexture = _content.Load<Texture2D>("GreenDragon");
             dragon = new Dragon(dragonTexture)
@@ -66,9 +72,19 @@ namespace App05Mono.Menu
             }
         }
 
+        private void Quit_Click(object sender, EventArgs e)
+        {
+            if (IsOver)
+            {
+                _game.Exit();
+                IsOver = true;
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             reload.Update(gameTime);
+            quit.Update(gameTime);
 
             if (!IsOver)
             {
@@ -99,6 +115,7 @@ namespace App05Mono.Menu
             {
                 if (!enemy[i].IsAlive)
                 {
+                    dragon.Score++;
                     enemy.RemoveAt(i);
                     i--;
                 }
@@ -126,7 +143,7 @@ namespace App05Mono.Menu
             _spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
             foreach (var sprite in _sprites)
-                sprite.Draw(gameTime, _spriteBatch);
+            sprite.Draw(gameTime, _spriteBatch);
             dragon.Draw(gameTime, _spriteBatch);
 
             _spriteBatch.End();
@@ -143,7 +160,7 @@ namespace App05Mono.Menu
             {
                 _spriteBatch.DrawString(arialFont, "App05: MonoGame by Nerizza Flores ", new Vector2(x, 05f), Color.DimGray);
                 _spriteBatch.DrawString(arialFont, "Health: " + dragon.Health, new Vector2(x, 30f), Color.LightSlateGray);
-                _spriteBatch.DrawString(arialFont, "Score: ", new Vector2(x, 50f), Color.LightSlateGray);
+                _spriteBatch.DrawString(arialFont, "Score: " + dragon.Score, new Vector2(x, 50f), Color.LightSlateGray);
             }
 
             x += 150;
@@ -154,6 +171,7 @@ namespace App05Mono.Menu
                 _spriteBatch.DrawString(arialFont, "Game Over", new Vector2(640, 360) -
                     new Vector2(arialFont.MeasureString("Game Over").X / 2, 0), Color.Black);
                 reload.Draw(_spriteBatch);
+                quit.Draw(_spriteBatch);
             }
             _spriteBatch.End();
 

@@ -1,14 +1,23 @@
 ﻿using App05Mono.Menu;
 using App05Mono.Sound;
-using App05Mono.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
 
 namespace App05Mono
 {
+    /// <summary>
+    /// The Dragon vs Dino game is a shooting game, 
+    /// where the dragon will be the player and 
+    /// dino will be the enemy. Player can control the dragon
+    /// and shoot the enemy with its fire bullet. 
+    /// When the enemy collides with the dragon, it will
+    /// decrease health. Dragon has only 3 health, lose 3 health 
+    /// and the player lose. 
+    /// </summary>
+    /// <authors>
+    /// Nerizza Flores ver 3. 05/01/21
+    /// </authors>
     public class DvDGame : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -20,7 +29,7 @@ namespace App05Mono
         private State _nextState;
 
         /// <summary>
-        /// 
+        /// Constructor of the game
         /// </summary>
         public DvDGame()
         {
@@ -30,11 +39,10 @@ namespace App05Mono
         }
 
         /// <summary>
-        /// 
+        /// Setup the game window size to 720P 1280 x 720 pixels
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = ScreenWidth;
             _graphics.PreferredBackBufferHeight = ScreenHeight;
             _graphics.ApplyChanges();
@@ -43,7 +51,8 @@ namespace App05Mono
         }
 
         /// <summary>
-        /// 
+        ///LoadContent will load the game's content incluidng
+        ///sprite, menu and music.
         /// </summary>
         protected override void LoadContent()
         {
@@ -55,6 +64,12 @@ namespace App05Mono
             //SoundController.PlaySong("Klee!");
         }
 
+        /// <summary>
+        /// Check whether the state of the game is
+        /// on menu or within the game itself
+        /// Load the menu state as current state
+        /// then load game state as next state
+        /// </summary>
         protected override void Update(GameTime gameTime)
         {
             if(_nextState != null)
@@ -69,6 +84,10 @@ namespace App05Mono
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Draw all the sprites and other 
+        /// drawable images here
+        /// </summary>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -78,6 +97,10 @@ namespace App05Mono
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Method for changing the state
+        /// </summary>
+        /// <param name="state"></param>
         public void ChangeState(State state)
         {
             _nextState = state;
