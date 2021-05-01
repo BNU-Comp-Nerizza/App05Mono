@@ -8,12 +8,21 @@ using System.Text;
 
 namespace App05Mono.Menu
 {
+    /// <summary>
+    /// This is the state class that builds
+    /// the state of the game and menu 
+    /// </summary>
     public abstract class State
     {
         protected DvDGame _game;
         protected ContentManager _content;
         protected GraphicsDevice _graphicsDevice;
 
+        /// <summary>
+        /// constustor of the state class
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="content"></param>
         public State(DvDGame game, ContentManager content)
         {
             _game = game;

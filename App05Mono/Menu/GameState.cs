@@ -11,6 +11,14 @@ using System.Text;
 
 namespace App05Mono.Menu
 {
+    /// <summary>
+    /// This is the game state class which is 
+    /// the game , dragon vs dino, itself.
+    /// It adds the sprite for background,
+    /// dragon, enemy and bullet
+    /// that allows the player
+    /// It also outputs the player's score and health.
+    /// </summary>
     public class GameState : State
     {
         private List<Sprite> _sprites;
@@ -24,11 +32,21 @@ namespace App05Mono.Menu
         private Button reload;
         private Button quit;
 
+        /// <summary>
+        /// Constructor of the gamestate class
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="graphicsDevice"></param>
+        /// <param name="content"></param>
         public GameState(DvDGame game, GraphicsDevice graphicsDevice, ContentManager content)
             : base(game, graphicsDevice, content)
         {
         }
 
+        /// <summary>
+        /// Load the sprites of the game state class
+        /// including the button, dragon, bullet and background.
+        /// </summary>
         public override void LoadContent()
         {
             arialFont = _content.Load<SpriteFont>("arial");
@@ -63,6 +81,12 @@ namespace App05Mono.Menu
             };
         }
 
+        /// <summary>
+        /// Method when the reload button is clicked
+        /// it will reload the game state again
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reload_Click(object sender, EventArgs e)
         {
             if (IsOver)
@@ -72,6 +96,12 @@ namespace App05Mono.Menu
             }
         }
 
+        /// <summary>
+        /// Method when the quit button is clicked
+        /// it will exit the game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Quit_Click(object sender, EventArgs e)
         {
             if (IsOver)
@@ -81,6 +111,11 @@ namespace App05Mono.Menu
             }
         }
 
+        /// <summary>
+        /// This is called when the sprite
+        /// within the game state should update its state 
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             reload.Update(gameTime);
@@ -97,9 +132,12 @@ namespace App05Mono.Menu
                 foreach (var sprite in _sprites.ToArray())
                     sprite.Update(gameTime, _sprites);
             }
-
         }
 
+        /// <summary>
+        /// Method for loading the enemy
+        /// the enemy will be spawning in differnt times
+        /// </summary>
         public void LoadEnemy()
         {
 
@@ -124,10 +162,13 @@ namespace App05Mono.Menu
             }
         }
 
-
+        /// <summary>
+        /// Once the update is method called
+        /// the post update will removed the sprites
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void PostUpdate(GameTime gameTime)
         {
-
             for (int i = 0; i < _sprites.Count; i++)
             {
                 if (_sprites[i].IsRemoved)
@@ -138,6 +179,12 @@ namespace App05Mono.Menu
             }
         }
 
+        /// <summary>
+        /// This is called when the sprite 
+        /// within the game state should draw
+        /// including the background, enemy and player and button
+        /// it also outputs the score and health of the player
+        /// </summary>
         public override void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
         {
             _spriteBatch.Begin(SpriteSortMode.FrontToBack);
