@@ -29,6 +29,9 @@ namespace App05Mono.Sound
         public static void LoadContent(ContentManager content)
         {
             Songs.Add("Klee!", content.Load<Song>("Klee!"));
+
+            SoundEffects.Add("Fire", content.Load<SoundEffect>("FireSound"));
+            SoundEffects.Add("Explode", content.Load<SoundEffect>("ExplodeSound"));
         }
         /// <summary>
         /// Get a sound effect from the collection.
@@ -48,6 +51,7 @@ namespace App05Mono.Sound
             MediaPlayer.IsRepeating = true;
 
             MediaPlayer.Play(Songs[song]);
+            MediaPlayer.Volume = 0.05f;
         }
 
         public static void PauseSong()

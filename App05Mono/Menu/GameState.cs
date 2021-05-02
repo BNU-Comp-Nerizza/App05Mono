@@ -1,6 +1,8 @@
-﻿using App05Mono.Sprites;
+﻿using App05Mono.Sound;
+using App05Mono.Sprites;
 using App05Mono.Spritesa;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -31,6 +33,8 @@ namespace App05Mono.Menu
         public bool IsOver = false;
         private Button reload;
         private Button quit;
+        private SoundEffect explodeEffect;
+        private bool DoesWin = false;
 
         /// <summary>
         /// Constructor of the gamestate class
@@ -50,11 +54,10 @@ namespace App05Mono.Menu
         public override void LoadContent()
         {
             arialFont = _content.Load<SpriteFont>("arial");
-            //Using your button design
+            //Using the button design
             reload = new Button(_content.Load<Texture2D>("button"), arialFont);
             reload.Text = "Reload";
             //using the button images
-            //reload = new Button(_content.Load<Texture2D>("reload"), arialFont);
             reload.Position = new Vector2(640, 420);
             reload.Click += Reload_Click;
 
@@ -62,6 +65,8 @@ namespace App05Mono.Menu
             quit.Text = "Quit Game";
             quit.Position = new Vector2(640, 480);
             quit.Click += Quit_Click;
+
+            explodeEffect = SoundController.GetSoundEffect("Explode");
 
             var dragonTexture = _content.Load<Texture2D>("GreenDragon");
             dragon = new Dragon(dragonTexture)
@@ -94,6 +99,11 @@ namespace App05Mono.Menu
                 LoadContent();
                 IsOver = false;
             }
+            else if (DoesWin)
+            {
+                LoadContent();
+                DoesWin = false;
+            }
         }
 
         /// <summary>
@@ -108,6 +118,11 @@ namespace App05Mono.Menu
             {
                 _game.Exit();
                 IsOver = true;
+            }
+            else if (DoesWin)
+            {
+                _game.Exit();
+                DoesWin = true;
             }
         }
 
@@ -131,6 +146,21 @@ namespace App05Mono.Menu
 
                 foreach (var sprite in _sprites.ToArray())
                     sprite.Update(gameTime, _sprites);
+                CheckScore();
+            }
+        }
+
+        /// <summary>
+        /// Check if the player has
+        /// enough points to win
+        /// </summary>
+        public void CheckScore()
+        {
+            int maxScore = 50;
+            if (dragon.Score == maxScore)
+            {
+                DoesWin = true;
+                IsOver = true;
             }
         }
 
@@ -153,6 +183,7 @@ namespace App05Mono.Menu
             {
                 if (!enemy[i].IsAlive)
                 {
+                    explodeEffect.Play();
                     dragon.Score++;
                     enemy.RemoveAt(i);
                     i--;
@@ -212,7 +243,15 @@ namespace App05Mono.Menu
 
             x += 150;
 
-            if (IsOver)
+            if (DoesWin)
+            {
+                //Middle of the screen - half of string size
+                _spriteBatch.DrawString(arialFont, "You Win", new Vector2(640, 360) -
+                    new Vector2(arialFont.MeasureString("You Win").X / 2, 0), Color.Black);
+                reload.Draw(_spriteBatch);
+                quit.Draw(_spriteBatch);
+            }
+            else if (IsOver)
             {
                 //Middle of the screen - half of string size
                 _spriteBatch.DrawString(arialFont, "Game Over", new Vector2(640, 360) -

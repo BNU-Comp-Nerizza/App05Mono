@@ -26,7 +26,7 @@ namespace App05Mono.Sprites
         /// <param name="texture"></param>
         public Dragon(Texture2D texture) : base(texture)
         {
-            Health = 3;
+            Health = 10;
             Score = 0;
         }
 

@@ -61,7 +61,7 @@ namespace App05Mono
             _currentState = new MenuState(this, _graphics.GraphicsDevice, Content);
 
             SoundController.LoadContent(Content);
-            //SoundController.PlaySong("Klee!");
+            SoundController.PlaySong("Klee!");
         }
 
         /// <summary>
