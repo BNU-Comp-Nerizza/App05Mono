@@ -35,6 +35,8 @@ namespace App05Mono.Menu
         private Button quit;
         private SoundEffect explodeEffect;
         private bool DoesWin = false;
+        Scrolling scrolling1;
+        Scrolling scrolling2;
 
         /// <summary>
         /// Constructor of the gamestate class
@@ -75,13 +77,20 @@ namespace App05Mono.Menu
                 Bullet = new Bullet(_content.Load<Texture2D>("Bullet")),
             };
 
+            var backgroundTexture1 = _content.Load<Texture2D>("RPG-background1");
+            scrolling1 = new Scrolling(backgroundTexture1, new Rectangle(0, 0, DvDGame.ScreenWidth, DvDGame.ScreenHeight))
+            {
+                Layer = 0.0f,
+            };
+
+            var backgroundTexture2 = _content.Load<Texture2D>("RPG-background2");
+            scrolling2 = new Scrolling(backgroundTexture2, new Rectangle(DvDGame.ScreenWidth, 0, DvDGame.ScreenWidth, DvDGame.ScreenHeight))
+            {
+                Layer = 0.0f,
+            };
+
             _sprites = new List<Sprite>()
             {
-                new Sprite(_content.Load<Texture2D>("RPG-background"))
-                {
-                    Layer = 0.0f,
-                    Position = new Vector2(DvDGame.ScreenWidth/2, DvDGame.ScreenHeight /2 ),
-                },
                 dragon
             };
         }
@@ -148,6 +157,16 @@ namespace App05Mono.Menu
                     sprite.Update(gameTime, _sprites);
                 CheckScore();
             }
+            if (scrolling1.rectangle.X + scrolling1.texture.Width <= 0)
+            {
+                scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.texture.Width;
+            }
+            if (scrolling2.rectangle.X + scrolling2.texture.Width <= 0)
+            {
+                scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.texture.Width;
+            }
+            scrolling1.Update();
+            scrolling2.Update();
         }
 
         /// <summary>
@@ -219,6 +238,9 @@ namespace App05Mono.Menu
         public override void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
         {
             _spriteBatch.Begin(SpriteSortMode.FrontToBack);
+
+            scrolling1.Draw(_spriteBatch);
+            scrolling2.Draw(_spriteBatch);
 
             foreach (var sprite in _sprites)
             sprite.Draw(gameTime, _spriteBatch);

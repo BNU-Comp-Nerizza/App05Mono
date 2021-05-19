@@ -24,7 +24,6 @@ namespace App05Mono
         private SpriteBatch _spriteBatch;
         public const int ScreenHeight = 720;
         public const int ScreenWidth = 1280;
-        public static Random random;
         private State _currentState;
         private State _nextState;
 

@@ -26,7 +26,7 @@ namespace App05Mono.Sprites
         /// <param name="texture"></param>
         public Dragon(Texture2D texture) : base(texture)
         {
-            Health = 10;
+            Health = 5;
             Score = 0;
         }
 
@@ -72,16 +72,16 @@ namespace App05Mono.Sprites
             _previousKey = _currentKey;
             _currentKey = Keyboard.GetState();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-                _rotation -= MathHelper.ToRadians(RotationVelocity);
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                _rotation += MathHelper.ToRadians(RotationVelocity);
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+                Position.Y -= 1 * LinearVelocity;
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                Position.Y += 1 * LinearVelocity;
 
             Direction = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
                 Position += Direction * LinearVelocity;
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
                 Position -= Direction * LinearVelocity;
 
             if (_currentKey.IsKeyDown(Keys.Space) &&
