@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="App05Mono.DvDGame">
+    <Position X="12.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEAABwAAAAAAAAAAAABAAAACAIAAAAACABQ=</HashCode>
+      <FileName>DvDGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Sprites.Sprite">
+    <Position X="14.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQCAAAAAQBBEgAwECAEQAABAAgwAAQEBAAgAAgEABA=</HashCode>
+      <FileName>Sprites\Sprite.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="App05Mono.Sprites.Dragon">
+    <Position X="16.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAiAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Sprites\Dragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Sprites.Background">
+    <Position X="7.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAACAAAAAAAgAEAAAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Background.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Sprites.Scrolling">
+    <Position X="7.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Background.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Spritesa.Enemy">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAIAAAAQAgAAABAAIAAIAAAgAgAAAAQAAAAAAAA=</HashCode>
+      <FileName>Sprites\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Sound.SoundController">
+    <Position X="12.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAhAAAAAEAAAAAAAAAAAAAAAAAAEACAQ=</HashCode>
+      <FileName>Sound\SoundController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Menu.State">
+    <Position X="7.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgABAABAAABAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Menu\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Menu.GameState">
+    <Position X="10" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAZgAAAACAAEAgEAAABIAABBAAAIAAAAAAwBACAQAAY=</HashCode>
+      <FileName>Menu\GameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Menu.MenuState">
+    <Position X="10.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAAIgAABABAAAAAAAAAAAAAgAAAAAAAAAQ=</HashCode>
+      <FileName>Menu\MenuState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Menu.Component">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Menu\Component.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="App05Mono.Menu.Button">
+    <Position X="5.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAwAAAAAAQAAAgAgAAAAAAAAAAqgACAEAAAACAgAAgA=</HashCode>
+      <FileName>Menu\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

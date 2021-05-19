@@ -17,8 +17,6 @@ namespace App05Mono.Spritesa
         public Texture2D texture;
         public Vector2 position;
         public Vector2 velocity;
-        public Rectangle enemyRectangle;
-        public Dragon dragon1;
 
         public bool isVisible = true;
         public bool IsAlive { get; private set; } = true;
