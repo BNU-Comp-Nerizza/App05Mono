@@ -15,8 +15,6 @@ namespace App05Mono.Sprites
     {
         public int Health { get; set; }
 
-        public int Score { get; set; }
-
         public Bullet Bullet;
 
         /// <summary>
@@ -27,7 +25,6 @@ namespace App05Mono.Sprites
         public Dragon(Texture2D texture) : base(texture)
         {
             Health = 5;
-            Score = 0;
         }
 
         /// <summary>

@@ -176,7 +176,7 @@ namespace App05Mono.Menu
         public void CheckScore()
         {
             int maxScore = 50;
-            if (dragon.Score == maxScore)
+            if (dragon.score == maxScore)
             {
                 DoesWin = true;
                 IsOver = true;
@@ -259,7 +259,7 @@ namespace App05Mono.Menu
             {
                 _spriteBatch.DrawString(arialFont, "App05: MonoGame by Nerizza Flores ", new Vector2(x, 05f), Color.DimGray);
                 _spriteBatch.DrawString(arialFont, "Health: " + dragon.Health, new Vector2(x, 30f), Color.LightSlateGray);
-                _spriteBatch.DrawString(arialFont, "Score: " + dragon.Score, new Vector2(x, 50f), Color.LightSlateGray);
+                _spriteBatch.DrawString(arialFont, "Score: " + dragon.score, new Vector2(x, 50f), Color.LightSlateGray);
             }
 
             x += 150;
