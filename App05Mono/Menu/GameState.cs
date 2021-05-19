@@ -203,7 +203,6 @@ namespace App05Mono.Menu
                 if (!enemy[i].IsAlive)
                 {
                     explodeEffect.Play();
-                    dragon.Score++;
                     enemy.RemoveAt(i);
                     i--;
                 }

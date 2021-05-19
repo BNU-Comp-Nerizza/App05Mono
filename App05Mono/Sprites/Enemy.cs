@@ -92,6 +92,7 @@ namespace App05Mono.Spritesa
 
                     bullet.IsActive = false;
                     bullet.IsRemoved = true;
+                    bullet.Parent.score++;
 
                     this.IsAlive = false; // or add health and reduce health on impact.
 

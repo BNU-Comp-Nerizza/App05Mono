@@ -43,8 +43,8 @@ namespace App05Mono.Sprites
         public bool IsActive = false;
         public bool IsAlive = true;
         public bool IsVisible = false;
-        public bool HasDied = false; 
-
+        public bool HasDied = false;
+        internal int score;
         public readonly Color[] TextureData;
 
         public List<Sprite> Children { get; set; }
