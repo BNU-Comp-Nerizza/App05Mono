@@ -175,7 +175,7 @@ namespace App05Mono.Menu
         /// </summary>
         public void CheckScore()
         {
-            int maxScore = 50;
+            int maxScore = 25;
             if (dragon.score == maxScore)
             {
                 DoesWin = true;
