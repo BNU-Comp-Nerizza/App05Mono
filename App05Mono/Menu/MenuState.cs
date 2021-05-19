@@ -35,14 +35,14 @@ namespace App05Mono.Menu
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(650, 400),
+                Position = new Vector2(650, 500),
                 Text = "New Game",
             };
             newGameButton.Click += newGameButton_Click;
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(650, 450),
+                Position = new Vector2(650, 550),
                 Text = "Quit Game",
             };
             quitGameButton.Click += quitGameButton_Click;
@@ -75,7 +75,7 @@ namespace App05Mono.Menu
             _spriteBatch.Begin();
 
             backgroundMenu = _content.Load<Texture2D>(
-                "SpalshBG");
+                "RPG-Menubackground");
             Vector2 position = new Vector2(0, 0);
             _spriteBatch.Draw((Texture2D)backgroundMenu, position, Color.White);
             foreach (var components in _components)
